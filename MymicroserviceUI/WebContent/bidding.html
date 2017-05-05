@@ -1,0 +1,147 @@
+	<!DOCTYPE html>
+	<html>
+	 <head>
+	  <title> Bidding Details </title>
+	  <meta name="Generator" content="EditPlus">
+	  <meta name="Author" content="">
+	  <meta name="Keywords" content="">
+	  <meta name="Description" content="">
+	  <style>
+		input[type=text], textarea, table {
+			width: 100%; 
+			padding: 12px; 
+			border: 1px solid #ccc; 
+			border-radius: 4px; 
+			box-sizing: border-box; 
+			margin-top: 6px; 
+			margin-bottom: 16px; 
+			resize: vertical 
+		}
+		input[type=submit] {
+			background-color: #4CAF50;
+			color: white;
+			padding: 12px 20px;
+			border: none;
+			border-radius: 4px;
+			margin-top: 20px; 
+			cursor: pointer;
+		}
+		input[type=submit]:hover {
+			background-color: #45a049;
+		}
+		.container {
+			border-radius: 5px;
+			background-color: #f2f2f2;
+			padding: 20px;
+		}
+		#biddingTable {
+			border-collapse: collapse; 
+			width: 100%; 
+			border: 1px solid #ddd; 
+			font-size: 16px; 
+		}
+		#biddingTable th, #biddingTable td {
+			text-align: left; 
+			padding: 12px; 
+		}
+		#biddingTable tr {
+			border-bottom: 1px solid #ddd;
+		}
+		#biddingTable tr.header, #biddingTable tr:hover {
+			background-color: #f1f1f1;
+		}
+		/* The switch - the box around the slider */
+		.switch {
+		  position: relative;
+		  display: inline-block;
+		  width: 60px;
+		  height: 34px;
+		}
+
+		/* Hide default HTML radio button */
+		.switch input {display:none;}
+
+		/* The slider */
+		.slider {
+		  position: absolute;
+		  cursor: pointer;
+		  top: 0;
+		  left: 0;
+		  right: 0;
+		  bottom: 0;
+		  background-color: #ccc;
+		  border-radius: 4px;
+		  -webkit-transition: .4s;
+		  transition: .4s;
+		}
+
+		.slider:before {
+		  position: absolute;
+		  content: "";
+		  height: 26px;
+		  width: 26px;
+		  left: 4px;
+		  bottom: 4px;
+		  background-color: white;
+		  border-radius: 4px;
+		  -webkit-transition: .4s;
+		  transition: .4s;
+		}
+
+		input:checked + .slider {
+		  background-color: #4CAF50;
+		}
+
+		input:focus + .slider {
+		  box-shadow: 0 0 1px #2196F3;
+		}
+
+		input:checked + .slider:before {
+		  -webkit-transform: translateX(26px);
+		  -ms-transform: translateX(26px);
+		  transform: translateX(26px);
+		}
+
+	  </style>
+	 </head>
+
+	 <body>
+		 <div class="container">
+		  <form action="/award">
+			<label for="tenderinfo"><b>Tender Details</b></label>
+			<textarea id="tenderinfo" name="subject" placeholder="Tender information comes here" style="height:120px" readonly>
+			Sector 	Fertilizers and pesticides 	Tender Value 	N.A.
+			Location 	Maharashtra - India 	Ref.No 	17276961
+			Closing Date 	06 - Sep - 2031  |  5238 Days to go 
+			
+			Requirement: Supply of Skilled Electrical Manpower for Heavy Water Plant At, Rcf Thal.
+			</textarea>				
+			<table id="biddingTable">
+			  <tr class="header">
+				<th style="width:60%;">Bidding Details</th>
+				<th style="width:40%;"></th>
+			  </tr>
+			  <tr>
+				<td><p>Centre for Excellence ManPower, Uppal Road, Hyderabad – 500 007 (Telangana) INDIA</p></td>
+				<td>
+					<label class="switch">
+					<input type="radio" name="supplier"/>
+					<div class="slider"></div>
+					</label>
+				</td>
+			  </tr>
+			  <tr>
+				<td><p>ManPowerGroup, Phoenix Paragon Plaza,Unit no – 3B 23 to 27, 3rd Floor, Pheonix Market City, LBS Marg, Kurla – West, Mumbai, Maharashtra - 400070. INDIA</p></td>
+				<td>
+					<label class="switch">
+					<input type="radio" name="supplier"/>
+					<div class="slider"></div>
+					</label>
+				</td>
+			  </tr>
+			</table>
+			<input type="submit" value="Award">
+		  </form>
+		</div>
+	 </body>
+	</html>

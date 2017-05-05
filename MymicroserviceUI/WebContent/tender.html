@@ -1,0 +1,87 @@
+	<!DOCTYPE html>
+	<html ng-app="demo">
+	 <head >
+	  <title> Tender Details </title>
+	  <meta name="Generator" content="EditPlus">
+	  <meta name="Author" content="">
+	  <meta name="Keywords" content="">
+	  <meta name="Description" content="">
+	  <style>
+		input[type=text], textarea {
+			width: 100%; 
+			padding: 12px; 
+			border: 1px solid #ccc; 
+			border-radius: 4px; 
+			box-sizing: border-box; 
+			margin-top: 6px; 
+			margin-bottom: 16px; 
+			resize: vertical 
+		}
+		input[type=submit] {
+			background-color: #4CAF50;
+			color: white;
+			padding: 12px 20px;
+			border: none;
+			border-radius: 4px;
+			cursor: pointer;
+		}
+		input[type=submit]:hover {
+			background-color: #45a049;
+		}
+		.container {
+			border-radius: 5px;
+			background-color: #f2f2f2;
+			padding: 20px;
+		}
+		fieldset {
+			width: 100%; 
+			padding: 12px; 
+			border: 1px solid #ccc; 
+			border-radius: 4px; 
+			box-sizing: border-box; 
+			margin-top: 6px; 
+			margin-bottom: 16px; 
+		}
+	  </style>
+	   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
+    	<script src="chaincodeJs.js"></script>
+	 </head>
+	 <body ng-controller="tendCnt">
+		 <div class="container">
+		 <div  id="chaincodeDiv">
+			<p>The get bid response is {{greeting}}</p>
+			<input type="text" ng-model="jsonVal" id="jsonVal">
+		</div>
+		  <form action="/register">
+			<label><b>Tender Details</b></label>
+			<textarea name="subject" placeholder="Tender information comes here" style="height:120px" readonly>
+			Sector 	Fertilizers and pesticides 	Tender Value 	N.A.
+			Location 	Maharashtra - India 	Ref.No 	17276961
+			Closing Date 	06 - Sep - 2031  |  5238 Days to go 
+			
+			Requirement: Supply of Skilled Electrical Manpower for Heavy Water Plant At, Rcf Thal.
+			</textarea>	
+
+		  <fieldset>
+			<legend><b>Bid Tender</b></legend>
+			<label>Company Name & Address</label>
+			<textarea name="nameaddr" placeholder="Enter company name and full address here" style="height:100px" required>
+			</textarea>
+			<label>Years Of Experience</label>
+			<input type="text" name="exp" required>
+			<label>Expected No. of Days</label>
+			<input type="text" name="nodays" required>
+			<label>Proposal Details</label>
+			<textarea name="proposal" placeholder="Enter proposal information here" style="height:100px" required>
+			</textarea>	
+			<label >Bidding Price</label>
+			<input type="text" name="price" required>
+			<label>Additional Information</label>
+			<textarea name="otherinfo" placeholder="Enter additional information here" style="height:100px">
+			</textarea>	
+			<input type="submit" value="Register">
+		  </fieldset>
+		  </form>
+		</div>
+	 </body>
+	</html>

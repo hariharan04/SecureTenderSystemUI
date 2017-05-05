@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <style type="text/css">
+  
+table {
+  border: 1px solid #ccc;
+  border-collapse: collapse;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  table-layout: fixed;
+}
+table caption {
+  font-size: 1.5em;
+  margin: .5em 0 .75em;
+}
+table tr {
+  background: #f8f8f8;
+  border: 1px solid #ddd;
+  padding: .35em;
+}
+table th,
+table td {
+  padding: .625em;
+  text-align: center;
+}
+table th {
+  font-size: .85em;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+@media screen and (max-width: 600px) {
+  table {
+    border: 0;
+  }
+  table caption {
+    font-size: 1.3em;
+  }
+  table thead {
+    border: none;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+  }
+  table tr {
+    border-bottom: 3px solid #ddd;
+    display: block;
+    margin-bottom: .625em;
+  }
+  table td {
+    border-bottom: 1px solid #ddd;
+    display: block;
+    font-size: .8em;
+    text-align: right;
+  }
+  table td:before {
+    /*
+    * aria-label has no advantage, it won't be read inside a table
+    content: attr(aria-label);
+    */
+    content: attr(data-label);
+    float: left;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  table td:last-child {
+    border-bottom: 0;
+  }
+}
+  form {
+			border: 3px solid #f1f1f1;
+		}
+		input[type=text], input[type=password] {
+			width: 100%;
+			padding: 12px 20px;
+			margin: 8px 0;
+			display: inline-block;
+			border: 1px solid #ccc;
+			box-sizing: border-box;
+		}
+		button {
+			background-color: #4CAF50;
+			color: white;
+			padding: 12px 20px;
+			border: none;
+			border-radius: 4px;
+			margin-top: 20px; 
+			cursor: pointer;
+		}
+		button:hover {
+			opacity: 0.8;
+		}
+		.container {
+			padding: 16px;
+		}
+		
+  </style>
+  <script type="text/javascript">
+  
+  $(document).ready(function() {
+      
+          $("#link2").hide(); 
+          $("#link3").hide(); 
+          $("#menu2").hide(); 
+          $("#menu3").hide(); 
+
+  });
+  
+  function unique(array) {
+	    return $.grep(array, function(el, index) {
+	        return index === $.inArray(el, array);
+	    });
+	}
+  function getBid(userId) {
+	  var uri ='https://mymicroserviceboot.mybluemix.net/hello/chaincode/'+userId;
+	  ///hello/chaincode/allBid
+	  if(userId == 'webappAdmin') {
+		  var uri ='https://mymicroserviceboot.mybluemix.net/hello/chaincode/allBid';
+		  $.ajax({ 
+			   type: "GET",
+			   url: uri,
+			   success: function(data){ 
+			     var data1 = $.parseJSON(data);
+			     console.log(data1.result.message);
+			     var messageVal = $.parseJSON(data1.result.message);
+			     var arr = $.map(messageVal, function(el) { return el });
+			     arr = unique(arr);
+			     console.log(arr);
+			     $('#myDiv').append("<ul id='newList'></ul>");
+			     var trHTML = '';
+			     $(arr).each(function(i,val)
+			    		 {
+			    	 
+			    	 $(val).each(function(j,rec){
+			    		 console.log(val);
+			    	 console.log(rec.status+':'+rec.content+':'+rec.amount+':'+rec.BidTime)
+			    		    	 trHTML += '<tr><td>' + rec.status + '</td><td>' + rec.content + '</td><td>' + rec.amount + '</td><td>' + rec.BidTime + '</td><td>' + rec.txid + '</td></tr>';
+			    		 }); 
+			    		});
+			     $('#tender').append(trHTML);
+			     $("#link3").show(); 
+		          $("#menu3").show(); 
+		          var index = $('#tabs a[href="#menu3"]').parent().index();
+		          $('#tabs').tabs('select', index);
+			     $("#chaincodeDiv").append(data);
+			   }
+			});
+	  }else {
+		  $.ajax({ 
+			   type: "GET",
+			   url: uri,
+			   success: function(data){        
+			     var data1 = $.parseJSON(data);
+			     console.log(data1)
+			     console.log(data1.result.message);
+			     var messageVal = $.parseJSON(data1.result.message);
+			     document.getElementById('status').value = messageVal.status;
+			     document.getElementById('content').value = messageVal.content;
+			     document.getElementById('amount').value = messageVal.amount;
+			     document.getElementById('BidTime').value = messageVal.BidTime;
+			     $("#link2").show(); 
+		          $("#menu2").show(); 
+			     $("#chaincodeDiv").append(data);
+			   }
+			});
+	  }
+		
+	}
+  function postBid(userId,status,content,amount,bidTime) {
+	  var uri ='http://localhost:8090/hello/bid/'+userId+'/'+status+'/'+content+'/'+bidTime+'/'+amount+'/test';
+		$.ajax({ 
+			   type: "GET",
+			   url: uri,
+			   success: function(data){        
+			    
+			   }
+			});
+	}
+  </script>
+</head>
+<body>
+
+
+<div class="container" id="tabs">
+  
+  <ul class="nav nav-tabs">
+    <li id="link1"><a data-toggle="tab" href="#menu1">login</a></li>
+    <li id="link2"><a data-toggle="tab" href="#menu2">Menu 2</a></li>
+    <li id="link3"><a data-toggle="tab" href="#menu3">Menu 3</a></li>
+  </ul>
+
+  <div class="tab-content">
+    
+    <div id="menu1" class="tab-pane fade">
+      <h3>Login</h3>
+      <div class="container">
+			<label><b>Username</b></label>
+			<input type="text"  name="uname" id="uname" required >
+
+			<label><b>Password</b></label>
+			<input type="password"  name="psw" required>
+			<button type="button" onclick="getBid(document.getElementById('uname').value);">Login</button>
+		  </div>
+		   
+    </div>
+   
+    <div id="menu2" class="tab-pane fade"> 
+     <fieldset>
+    <legend>Tender information:</legend>
+    Company Name & Address :<br>
+    <input type="text" id="status" value=""><br>
+    Proposal Details :<br>
+    <input type="text" id="content" value=""><br><br>
+     Bidding Price :<br>
+    <input type="text" id="amount" value=""><br>
+    Additional Information :<br>
+    <input type="text" id="BidTime" value=""><br><br>
+    <button type="button" onclick="postBid(document.getElementById('uname').value,document.getElementById('status').value,document.getElementById('content').value,document.getElementById('amount').value,document.getElementById('BidTime').value);">submit</button>
+  </fieldset>
+    </div>
+    <div id="menu3" class="tab-pane fade">
+    <fieldset>
+    <legend>All Tender information:</legend>
+   <table id="tender" border='1'>
+    <tr>
+        <th>Company Name & Address </th>
+        <th>Proposal Details </th>
+         <th>Bidding Price</th>
+         <th>Additional Information</th>
+          <th>Transaction Id</th>
+    </tr>
+</table>
+</fieldset>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
